@@ -28,9 +28,11 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     // Dashboard
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    }
+    Route::get(
+        '/dashboard',
+        function () {
+            return Inertia::render('Dashboard');
+        }
     )->name('dashboard');
 
     // Profile Route
@@ -39,9 +41,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // Community Route
-    Route::resource('/community', CommunityController::class);
+    Route::resource('/communities', CommunityController::class);
 });
 
- 
 
-require __DIR__.'/auth.php';
+
+require __DIR__ . '/auth.php';

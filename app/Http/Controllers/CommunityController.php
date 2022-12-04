@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CommunityFormRequest;
+use App\Models\Community;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Inertia\Inertia;
 
 class CommunityController extends Controller
 {
@@ -13,7 +18,7 @@ class CommunityController extends Controller
      */
     public function index()
     {
-        //
+        return 'ok';
     }
 
     /**
@@ -23,7 +28,7 @@ class CommunityController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Community/Create');
     }
 
     /**
@@ -32,9 +37,12 @@ class CommunityController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CommunityFormRequest $request)
     {
-        //
+
+        Community::create($request->validated() + ['user_id' => Auth::id()]);
+        
+        return Redirect::route('communities.index');
     }
 
     /**

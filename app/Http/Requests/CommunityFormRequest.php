@@ -13,7 +13,7 @@ class CommunityFormRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class CommunityFormRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required', 'unique:communities,name'],
+            'slug' => ['required', 'unique:communities'],
+            'description' => ['required', 'min:5'],
         ];
     }
 }
